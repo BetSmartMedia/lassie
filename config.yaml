@@ -1,0 +1,46 @@
+options:
+  # Check every X seconds
+  check_frequency: 60
+
+  # Run as a daemon
+  daemon: false
+  log:    lassie.log
+  pid:    lassie.pid
+
+  # Twilio API credentials
+  twilio:
+    sid:   TWILIO_SID
+    token: TWILIO_TOKEN
+    phnum: TWILIO_PHNUM   # outgoing phone number
+
+#
+# ALERTS LEVELS + CONTACTS
+#
+alerts:
+  notify:
+    admin-email:
+      type:  email
+      email: admin@example.com
+  emerg:
+    admin-sms:
+      type:  sms
+      phone: "+18001234567"
+
+#
+# CHECKS
+#
+checks:
+  server1:
+    type:   ping
+    host:   server1.example.com
+    alerts: [emerg, notify]
+  server2:
+    type:   ping
+    host:   server2.example.com
+    alerts: [emerg]
+
+  site-web:
+    type:     web
+    url:      http://www.example.com
+    fragment: "This is an example site"
+    alerts:   [emerg, notify]

@@ -1,0 +1,24 @@
+{
+  "author": "Judd Vinet <judd@betsmartmedia.com>",
+  "name": "lassie",
+  "description": "A watchdog service",
+  "version": "0.0.1",
+  "main": "lassie.js",
+	"bin": "lasssie.js",
+  "engines": {
+    "node": "~0.6.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/BetSmartMedia/lassie.git"
+  },
+  "dependencies": {
+		"colors":      "",
+    "node-mailer": "",
+    "dateformat":  "",
+		"js-yaml":     "",
+    "daemon":      "0.4.1",
+		"express":     ""
+  },
+  "devDependencies": {}
+}
