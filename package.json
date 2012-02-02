@@ -3,8 +3,8 @@
   "name": "lassie",
   "description": "A watchdog service",
   "version": "0.0.1",
-  "main": "lassie.js",
-	"bin": "lasssie.js",
+  "main": "lassie.coffee",
+	"bin": "lasssie.coffee",
   "engines": {
     "node": "~0.6.7"
   },
