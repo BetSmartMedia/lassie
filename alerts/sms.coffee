@@ -21,4 +21,3 @@ exports.run = (check_name, check_params, alert_params, alive) ->
 		if err?
 			console.log "Twilio Error: #{err.message}"
 			return
-		console.log "SMS sent"

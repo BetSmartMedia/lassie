@@ -3,14 +3,23 @@
 # Lassie - A watchdog service
 #
 
-require 'js-yaml'
 require 'colors'
 util   = require 'util'
 fs     = require 'fs'
+yaml   = require 'js-yaml'
 daemon = require 'daemon'
 Lassie = require './lib/lassie'
 
-config = (require './config.yaml')[0]
+if process.argv.length < 3
+	console.error "Usage: coffee lassie.coffee <config>"
+	process.exit 1
+try
+	configtxt = fs.readFileSync process.argv[2], 'utf8'
+	config    = yaml.load configtxt
+catch e
+	console.error "Error reading config:", e.message
+	process.exit 1
+
 checks = {}
 alerts = {}
 
