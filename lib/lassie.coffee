@@ -40,7 +40,7 @@ exports.run = () ->
 	tick = () -> running = false if --num_checks < 1
 
 	for name, params of config.checks
-		log "Checking: #{name} (#{params.type})"
+		#log "Checking: #{name} (#{params.type})"
 		do (name, params) ->
 			checks[params.type].run params, (status) ->
 				if status
