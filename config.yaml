@@ -43,4 +43,6 @@ checks:
     type:     web
     url:      http://www.example.com
     fragment: "This is an example site"
+    # This check must fail twice in a row before we consider it down.
+    failures: 2
     alerts:   [emerg, notify]

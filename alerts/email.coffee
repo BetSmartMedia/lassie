@@ -2,7 +2,7 @@
 # Alert: Email
 #
 
-mailer = require 'node-mailer'
+mailer = require '../lib/node-mailer'
 
 exports.init = (config) ->
 

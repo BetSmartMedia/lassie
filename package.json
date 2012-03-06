@@ -2,7 +2,7 @@
   "author": "Judd Vinet <judd@betsmartmedia.com>",
   "name": "lassie",
   "description": "A watchdog service",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "lassie.coffee",
 	"bin": "lassie.coffee",
   "engines": {
@@ -14,7 +14,7 @@
   },
   "dependencies": {
 		"colors":      "",
-    "node-mailer": "",
+    "nodemailer":  "0.2.4",
     "dateformat":  "",
 		"js-yaml":     "",
     "daemon":      "0.4.1"
