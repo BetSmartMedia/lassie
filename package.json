@@ -2,21 +2,21 @@
   "author": "Judd Vinet <judd@betsmartmedia.com>",
   "name": "lassie",
   "description": "A watchdog service",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "lassie.coffee",
-	"bin": "lassie.coffee",
+  "bin": "lassie.coffee",
   "engines": {
-    "node": "~0.6.7"
+  "node": "~0.6.7"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/BetSmartMedia/lassie.git"
   },
   "dependencies": {
-		"colors":      "",
+    "colors":      "",
     "nodemailer":  "0.2.4",
     "dateformat":  "",
-		"js-yaml":     "",
+    "js-yaml":     "",
     "daemon":      "0.4.1"
   },
   "devDependencies": {}
