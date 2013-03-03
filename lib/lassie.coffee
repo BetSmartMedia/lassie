@@ -21,7 +21,7 @@ exports.init = (_config, _checks, _alerts) ->
 	checks = _checks
 	alerts = _alerts
 	for name, params of config.checks
-		state[name] = alive: true, failures: 0
+		state[name] = alive: true, failures: 0, last_alert: 0
 
 exports.run = () ->
 	# prevent multiple runs from executing at the same time
@@ -33,8 +33,8 @@ exports.run = () ->
 	alerts_to_fire = []
 	num_checks = Object.keys(config.checks).length
 
-	# tick() is fired after every check
-	tick = () ->
+	# check_finished() is fired after every check
+	check_finished = () ->
 		if --num_checks > 0
 			return
 		running = false
@@ -72,8 +72,9 @@ exports.run = () ->
 						if state[name].failures >= failures
 							log "Check #{name} FAILED".red
 							state[name].alive = false
+							state[name].last_alert = (new Date).getTime()
 							alerts_to_fire.push [name, params, state[name].alive]
 						else
 							d = failures - state[name].failures
 							log "Check #{name} has failed #{state[name].failures} time(s) (#{d} more until alert)".yellow
-				tick()
+				check_finished()
