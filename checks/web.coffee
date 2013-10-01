@@ -27,5 +27,8 @@ exports.run = (params, cb) ->
 			else
 				cb false
 
+	req.setTimeout 20000, ->
+		req.abort()
+		cb false
 	req.on 'error', (e) -> cb false
 	req.end()

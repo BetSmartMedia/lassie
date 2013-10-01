@@ -44,12 +44,19 @@ run = () ->
 	interval config.options.check_frequency * 1000, -> Lassie.run()
 
 if config.options.daemon
-	daemon.daemonize config.options.log, config.options.pid, (err, pid) ->
-		# catch SIGTERM and remove PID file
-		process.on 'SIGTERM', () ->
-			fs.unlinkSync config.options.pid
-			process.exit 0
-		run()
-else
-	run()
+	# become a daemon; PID will change here, as we are re-executed.
+	fd = fs.openSync config.options.log, 'a'
+	daemon { stdout: fd, stderr: fd }
+	# write PID
+	fs.writeFileSync config.options.pid, process.pid
+
+	console.log "Starting"
+
+	# catch SIGTERM and remove PID file
+	process.on 'SIGTERM', () ->
+		console.log "Caught SIGTERM, shutting down"
+		fs.unlinkSync config.options.pid
+		process.exit 0
+	
+run()
 

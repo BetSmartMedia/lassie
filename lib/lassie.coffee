@@ -61,6 +61,7 @@ exports.run = () ->
 			checks[params.type].run params, (status) ->
 				if status
 					state[name].failures = 0
+					#log "Check #{name} OKAY".cyan
 					if state[name].alive is false
 						log "Check #{name} RECOVERED".green
 						state[name].alive = true

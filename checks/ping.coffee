@@ -13,7 +13,7 @@ exports.run = (params, cb) ->
 			cb true
 		else
 			f = ->
-				ping = cproc.spawn 'ping', ['-c', '3', params.host]
+				ping = cproc.spawn 'ping', ['-w', '10', '-c', '3', params.host]
 				ping.on 'exit', (code) ->
 					cb !code
 			setTimeout f, 500
