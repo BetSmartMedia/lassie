@@ -12,11 +12,14 @@ timer = (ms, cb) -> setTimeout cb, ms
 exports.run = (params, cb) ->
 	url = urlp.parse(params.url)
 	opts = {
-		host:   url.host
+		host:   url.hostname
 		path:   url.path
-		port:   if url.protocol is 'https:' then 443 else 80
+		port:   url.port
 		method: 'GET'
 	}
+	if opts.port is null
+		opts.port = if url.protocol is 'https:' then 443 else 80
+
 	request = if url.protocol is 'https:' then https.request else http.request
 	req = request opts, (res) ->
 		body = ""
