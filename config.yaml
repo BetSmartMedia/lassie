@@ -13,6 +13,10 @@ options:
     token: TWILIO_TOKEN
     phnum: TWILIO_PHNUM   # outgoing phone number
 
+  # Pushover API credentials
+pushover:
+    token: PUSHOVER_APP_TOKEN
+
 #
 # ALERTS LEVELS + CONTACTS
 #
@@ -25,6 +29,10 @@ alerts:
     admin-sms:
       type:  sms
       phone: "+18001234567"
+  panic:
+    admin-pushover:
+      type: pushover
+      key:  USER_API_KEY
 
 #
 # CHECKS
