@@ -22,5 +22,5 @@ exports.run = (checks, alert_params) ->
 
 	push.send alert_params.key, subject, body, (err, res) ->
 		if err?
-			console.log "Twilio Error: #{err.message}"
+			console.log "Pushover Error: #{err.message}"
 			return
