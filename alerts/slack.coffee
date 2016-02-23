@@ -69,10 +69,13 @@ exports.run = (checks, alert_params) ->
 		else
 			body += "Check \"#{v.name}\" (#{v.params.type}) has FAILED\n"
 
-	for name, id of channels
-		console.log("[slack] Sending to #{name} / #{id}")
-		rtm.sendMessage(body, id)
+	alert_params.channels or= []
+	alert_params.users or= []
 
-	for name, id of dms
-		console.log("[slack] Sending to #{name} / #{id}")
-		rtm.sendMessage(body, id)
+	for name in alert_params.channels
+		console.log("[slack] Sending to #{name} / #{channels[name]}")
+		rtm.sendMessage(body, channels[name])
+
+	for name in alert_params.users
+		console.log("[slack] Sending to #{name} / #{dms[name]}")
+		rtm.sendMessage(body, dms[name])

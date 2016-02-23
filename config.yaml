@@ -13,6 +13,14 @@ options:
     token: TWILIO_TOKEN
     phnum: TWILIO_PHNUM   # outgoing phone number
 
+  # Slack API token and target channels/users
+  slack:
+    token: SLACK_TOKEN
+    channels:
+      - 'monitoring'
+    users:
+      - 'judd'
+
 #
 # ALERTS LEVELS + CONTACTS
 #
@@ -21,10 +29,16 @@ alerts:
     admin-email:
       type:  email
       email: admin@example.com
+    team-chat:
+      type: slack
+      channels: ['log']
   emerg:
     admin-sms:
       type:  sms
       phone: "+18001234567"
+    admin-slack:
+      type: slack
+      users: ['judd']
 
 #
 # CHECKS
@@ -46,3 +60,11 @@ checks:
     # This check must fail twice in a row before we consider it down.
     failures: 2
     alerts:   [emerg, notify]
+
+  site-api:
+    type: rest
+    alerts: [emerg]
+    url: 'https://api.example.com/test_endpoint'
+    headers:
+      accept: application/json
+      x-api-key: abc123456
