@@ -11,7 +11,7 @@ state  = {}
 
 running = false
 
-log = (str) ->
+exports.log = log = (str) ->
 	now = dateFormat new Date, "yyyy-mm-dd HH:MM:ss"
 	msg = "[#{now}] #{str}"
 	console.log msg
@@ -52,7 +52,7 @@ exports.run = () ->
 		# send out alerts in batches
 		for name, v of batch
 			for alert_name, alert_params of config.alerts[name]
-				console.log "Fire alert: #{alert_params.type}"
+				log "Fire alert: #{alert_params.type}"
 				alerts[alert_params.type].run v, alert_params
 
 	for name, params of config.checks

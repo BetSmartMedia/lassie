@@ -43,24 +43,31 @@ for type, mod of alerts
 		if --remaining == 0
 			startup()
 
+
 run = ->
 	Lassie.init config, checks, alerts
 	Lassie.run()
 	interval config.options.check_frequency * 1000, -> Lassie.run()
 
+
 startup = ->
 	if config.options.daemon
+		# Hack: Override the execPath, as the 'daemon' module will use this to
+		# re-execute ourselves as a daemon, and the default 'node' binary will not
+		# understand CoffeeScript.
+		process.execPath = process.argv[0]
+
 		# become a daemon; PID will change here, as we are re-executed.
 		fd = fs.openSync config.options.log, 'a'
 		daemon { stdout: fd, stderr: fd }
 		# write PID
 		fs.writeFileSync config.options.pid, process.pid
 
-		console.log "Starting"
+		Lassie.log "Starting"
 
 		# catch SIGTERM and remove PID file
-		process.on 'SIGTERM', () ->
-			console.log "Caught SIGTERM, shutting down"
+		process.on 'SIGTERM', ->
+			Lassie.log "Caught SIGTERM, shutting down"
 			fs.unlinkSync config.options.pid
 			process.exit 0
 

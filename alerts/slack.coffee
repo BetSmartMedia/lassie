@@ -2,6 +2,8 @@
 # Alert: Slack
 #
 
+log = require('../lib/lassie').log
+
 RtmClient = require('slack-client').RtmClient
 WebClient = require('slack-client').WebClient
 
@@ -20,7 +22,7 @@ dms = {}
 loadChannels = (cb) ->
 	web.channels.list (err, info) ->
 		if err
-			console.log "Slack Error: #{err}"
+			log "Slack Error: #{err}"
 		else
 			config?.channels?.forEach (name) ->
 				info.channels.forEach (ch) ->
@@ -31,7 +33,7 @@ loadChannels = (cb) ->
 loadUsers = (cb) ->
 	web.users.list (err, info) ->
 		if err
-			console.log "Slack Error: #{err}"
+			log "Slack Error: #{err}"
 		else
 			config?.users?.forEach (name) ->
 				for u in info.members
@@ -73,9 +75,9 @@ exports.run = (checks, alert_params) ->
 	alert_params.users or= []
 
 	for name in alert_params.channels
-		console.log("[slack] Sending to #{name} / #{channels[name]}")
+		log "slack: Sending to #{name} / #{channels[name]}"
 		rtm.sendMessage(body, channels[name])
 
 	for name in alert_params.users
-		console.log("[slack] Sending to #{name} / #{dms[name]}")
+		log "slack: Sending to #{name} / #{dms[name]}"
 		rtm.sendMessage(body, dms[name])
