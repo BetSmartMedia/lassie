@@ -4,7 +4,7 @@
 
 mailer = require '../lib/node-mailer'
 
-exports.init = (config) ->
+exports.init = (config, cb) -> cb()
 
 exports.run = (checks, alert_params) ->
 	body = ""

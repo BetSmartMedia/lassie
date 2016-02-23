@@ -7,9 +7,10 @@ TwilioClient = require('../lib/twilio').Client
 twilio = null
 phnum  = null
 
-exports.init = (config) ->
+exports.init = (config, cb) ->
 	twilio = new TwilioClient config.options.twilio.sid, config.options.twilio.token
 	phnum  = config.options.twilio.phnum
+	cb()
 
 exports.run = (checks, alert_params) ->
 	body = ""
