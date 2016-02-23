@@ -6,8 +6,9 @@ Pushover = require('node-pushover')
 
 push = null
 
-exports.init = (config) ->
+exports.init = (config, cb) ->
 	push = new Pushover(token: config.options.pushover.token)
+	cb()
 
 exports.run = (checks, alert_params) ->
 	subject = ""
@@ -23,4 +24,3 @@ exports.run = (checks, alert_params) ->
 	push.send alert_params.key, subject, body, (err, res) ->
 		if err?
 			console.log "Pushover Error: #{err.message}"
-			return

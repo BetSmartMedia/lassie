@@ -25,4 +25,3 @@ exports.run = (checks, alert_params) ->
 	twilio.sendSms phnum, alert_params.phone, body, (err, res) ->
 		if err?
 			log "Twilio Error: #{err.message}"
-			return
