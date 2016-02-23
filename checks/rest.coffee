@@ -34,7 +34,7 @@ exports.run = (params, cb) ->
 		body = ""
 		res.on 'data', (chunk) -> body += chunk
 		res.on 'end', () ->
-			if res.statusCode == 201
+			if res.statusCode == 200
 				cb true
 			else
 				cb false
