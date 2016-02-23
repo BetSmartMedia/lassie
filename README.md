@@ -75,7 +75,7 @@ alerts.
           email: admin@example.com
         team-chat:
           type: slack
-          channels: ['log']
+          channels: ['monitoring']
       emerg:
         admin-sms:
           type:  sms
