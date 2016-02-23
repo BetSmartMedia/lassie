@@ -21,6 +21,10 @@ options:
     users:
       - 'judd'
 
+  # Pushover API credentials
+  pushover:
+    token: PUSHOVER_APP_TOKEN
+
 #
 # ALERTS LEVELS + CONTACTS
 #
