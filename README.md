@@ -25,6 +25,7 @@ alerts.
 - **web**: Retrieve a remote URL and look in the resulting payload for a
   specific fragment string. Can be useful to assess whether the payload is
   the expected body or whether it's an error message.
+- **tcp**: Similar to the **web** check, but uses a raw TCP connection.
 - **rest**: Retrieve a RESTful API endpoint and check if the HTTP status
   code was 200. If not, then it will be considered to be in a fail state.
 
@@ -35,6 +36,8 @@ alerts.
 - **sms**: Uses Twilio, so you will need an account with them.
 - **slack**: You'll need to create a Bot Integration within your Slack
   account and use the provided API token.
+- **pushover**: A SaaS product that sends push alerts to your phone. See
+  their [website](https://pushover.net) for more details.
 
 
 ### Example Configuration
