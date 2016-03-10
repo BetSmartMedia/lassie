@@ -7,6 +7,17 @@ options:
   log:    lassie.log
   pid:    lassie.pid
 
+  # Perform a network-sanity check before testing services; this helps to
+  # reduce the frequency of false-positive alerts that can arise if the
+  # Lassie machine has a degraded network connection.
+  #
+  # If set, Lassie will attempt a TCP connection to the host/port defined
+  # here, and if it fails, it will not perform any service checks until the
+  # next cycle.
+  network_check:
+    host: www.google.com
+    port: 80
+
   # Twilio API credentials
   twilio:
     sid:   TWILIO_SID
@@ -32,10 +43,10 @@ alerts:
   notify:
     admin-email:
       type:  email
-      email: admin@example.com
+      to: admin@example.com
     team-chat:
       type: slack
-      channels: ['log']
+      channels: ['monitoring']
   emerg:
     admin-sms:
       type:  sms

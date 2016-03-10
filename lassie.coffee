@@ -26,23 +26,6 @@ alerts = {}
 # fix setInterval's argument order
 interval = (time, fn) -> setInterval fn, time
 
-# Load check modules referenced in the config
-for _, c of config.checks
-	continue if checks[c.type]?
-	checks[c.type] = require "./checks/#{c.type}"
-
-# Load alert modules referenced in the config
-for _, section of config.alerts
-	for _, a of section
-		continue if alerts[a.type]?
-		alerts[a.type] = require "./alerts/#{a.type}"
-
-remaining = Object.keys(alerts).length
-for type, mod of alerts
-	mod.init config, ->
-		if --remaining == 0
-			startup()
-
 
 run = ->
 	Lassie.init config, checks, alerts
@@ -72,3 +55,27 @@ startup = ->
 			process.exit 0
 
 	run()
+
+# Always load the ping and tcp checks - the network_check feature will
+# want them.
+checks.ping = require "./checks/ping"
+checks.tcp = require "./checks/tcp"
+
+# Load check modules referenced in the config
+for _, c of config.checks
+	continue if checks[c.type]?
+	checks[c.type] = require "./checks/#{c.type}"
+
+# Load alert modules referenced in the config
+for _, section of config.alerts
+	for _, a of section
+		continue if alerts[a.type]?
+		alerts[a.type] = require "./alerts/#{a.type}"
+
+remaining = Object.keys(alerts).length
+for type, mod of alerts
+	mod.init config, ->
+		if --remaining == 0
+			startup()
+
+

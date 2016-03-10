@@ -72,7 +72,7 @@ alerts.
       notify:
         admin-email:
           type:  email
-          email: admin@example.com
+          to: admin@example.com
         team-chat:
           type: slack
           channels: ['monitoring']
