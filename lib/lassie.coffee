@@ -86,7 +86,6 @@ exports.run = () ->
 					check_finished()
 
 	if config.options.network_check
-		o = config.options.network_check
 		o =
 			host: config.options.network_check.host
 			port: config.options.network_check.port
